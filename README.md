@@ -43,3 +43,8 @@ To: abc@def.com
 Body:
 Hello Abc Xyz...
 ```
+
+
+# License
+
+MIT
