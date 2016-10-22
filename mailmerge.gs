@@ -27,7 +27,7 @@ function main () {
   var quota = MailApp.getRemainingDailyQuota()
   var ui = SpreadsheetApp.getUi()
 
-  ui.alert('[Newv2] Your remaining daily email quota: ' + quota)
+  ui.alert('Your remaining daily email quota: ' + quota)
 
   if (quota === 0) {
     ui.alert('You can not send more emails')
@@ -87,8 +87,4 @@ function main () {
   }
 
   ui.alert(count + ' emails sent.')
-}
-
-function sendMail () {
-  main()
 }
