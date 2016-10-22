@@ -1,7 +1,7 @@
 function onOpen () {
   var ui = SpreadsheetApp.getUi()
-  ui.createMenu('Mail Merge')
-    .addItem('Send mail', 'sendMail')
+  ui.createMenu('Gmail Mail Merge')
+    .addItem('Start mail merge utility', 'main')
     .addToUi()
 }
 
@@ -18,7 +18,7 @@ function getColumnHeadings (sheet) {
   return columns
 }
 
-function getDraft () {
+function getLatestDraft () {
   var drafts = GmailApp.getDraftMessages()
   if (drafts.length === 0) return null
   else return drafts[0]
@@ -38,9 +38,9 @@ function main () {
   var labelRegex = /{{[\w\s\d]+}}/g
   var sheet = SpreadsheetApp.getActiveSheet()
 
-  var draft = getDraft()
+  var draft = getLatestDraft()
   
-  if (!draft) {
+  if (draft === null) {
     ui.alert('No email draft found in your Google account. First draft an email.')
     return
   }
