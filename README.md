@@ -3,13 +3,13 @@
 > This script will use the ***most recent*** draft in Gmail as a ***template***.
 
 
-# Features
+## Features
 
 * Handles duplicate entries (by email address)
 * Works with HTML and plain text emails
 
 
-# Usage
+## Usage
 
 1. Open Spreadsheet
 2. Go to `Tools > Script editor...`
@@ -19,7 +19,7 @@
 4. From Spreadsheet, Go to `Mail Merge > Send mail`
 
 
-## Example Spreadsheet
+### Example Spreadsheet
 
 | First name | Last name | Email       |
 | ---------- | --------- | ----------- |
@@ -27,7 +27,7 @@
 | Def        | Pqr       | def@pqr.com |
 
 
-## Template
+### Template
 
 ```
 To: Email (here, put the title of email column)
@@ -36,7 +36,7 @@ Hello {{First name}} {{Last name}}...
 ```
 
 
-## Merged mail
+### Email Outcome
 
 ```
 To: abc@def.com
@@ -45,6 +45,6 @@ Hello Abc Xyz...
 ```
 
 
-# License
+## License
 
 MIT
