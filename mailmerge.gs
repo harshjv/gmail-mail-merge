@@ -20,7 +20,8 @@ function getColumnHeadings (sheet) {
 
 function getDraft () {
   var drafts = GmailApp.getDraftMessages()
-  return drafts[0]
+  if (drafts.length === 0) return null
+  else return drafts[0]
 }
 
 function main () {
@@ -38,7 +39,12 @@ function main () {
   var sheet = SpreadsheetApp.getActiveSheet()
 
   var draft = getDraft()
-
+  
+  if (!draft) {
+    ui.alert('No email draft found in your Google account. First draft an email.')
+    return
+  }
+  
   var subject = draft.getSubject()
   var htmlBodyRaw = draft.getBody()
   var plainBodyRaw = draft.getPlainBody()
