@@ -5,8 +5,8 @@
 
 # Features
 
-* Handles duplicate entries (by email)
-* Works on HTML and plain text emails
+* Handles duplicate entries (by email address)
+* Works with HTML and plain text emails
 
 
 # Usage
