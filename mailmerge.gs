@@ -24,6 +24,31 @@ function getLatestDraft () {
   else return drafts[0]
 }
 
+function promptSenderAlias(){
+  var ui = SpreadsheetApp.getUi()
+  var prompt = ui.prompt("Enter sender alias (leave it blank for using your e-mail address)", ui.ButtonSet.OK)
+  var alias = prompt.getResponseText()
+  if (alias){
+    var aliases = GmailApp.getAliases()
+    if (aliases.indexOf(alias) == -1){
+      ui.alert('Alias ' + alias + ' not found. Will use your e-mail address')
+      alias = ''
+    }
+  }
+
+  if (!alias){
+    alias = Session.getActiveUser().getEmail()
+  }
+  
+  return alias;
+}
+
+function promptSenderName(){
+  var ui = SpreadsheetApp.getUi()
+  var prompt = ui.prompt("Enter sender name", ui.ButtonSet.OK)
+  return prompt.getResponseText()
+}
+
 function main () {
   var quota = MailApp.getRemainingDailyQuota()
   var ui = SpreadsheetApp.getUi()
@@ -48,9 +73,12 @@ function main () {
   var subject = draft.getSubject()
   var htmlBodyRaw = draft.getBody()
   var plainBodyRaw = draft.getPlainBody()
-  var emailPlaceHolder = draft.getTo()
-
-  var response = ui.alert('Do you want to send drafted message titled "' + subject + '" to ' + (sheet.getLastRow() - 1) + ' people?', ui.ButtonSet.YES_NO)
+  var emailPlaceHolder = draft.getTo() ? draft.getTo() : 'email'
+  var attachments = draft.getAttachments()
+  var senderAlias = promptSenderAlias()
+  var senderName = promptSenderName()
+  
+  var response = ui.alert('Do you want to send this drafted message?\n\nTITLE: "' + subject + '"\nFROM:: ' + senderName + '<' + senderAlias + '>\nTO: ' + (sheet.getLastRow() - 1) + ' people?', ui.ButtonSet.YES_NO)
 
   if (response === ui.Button.NO) {
     ui.alert('Stopped')
@@ -81,9 +109,12 @@ function main () {
         var label = k.substring(2, k.length - 2)
         return row[columns[label]]
       })
-
-      MailApp.sendEmail(email, subject, plainBody, {
-        htmlBody: htmlBody
+      
+      GmailApp.sendEmail(email, subject, plainBody, {
+        htmlBody: htmlBody,
+        from: senderAlias,
+        name: senderName,
+        attachments: attachments
       })
 
       emailMap[email] = true
