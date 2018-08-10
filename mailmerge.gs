@@ -19,9 +19,11 @@ function getColumnHeadings (sheet) {
 }
 
 function getLatestDraft () {
-  var drafts = GmailApp.getDraftMessages()
-  if (drafts.length === 0) return null
-  else return drafts[0]
+  //var drafts = GmailApp.getDraftMessages()
+  var drafts = GmailApp.getDrafts()[0]
+  var message = drafts.getMessage()
+  if (message.length === 0) return null
+  else return message
 }
 
 function main () {
