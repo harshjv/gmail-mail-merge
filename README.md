@@ -15,8 +15,8 @@
 2. Go to `Tools > Script editor...`
   1. Paste contents of `mailmerge.gs` there
   2. Save it
-3. After saving script, you will notice a new menu **Mail Merege** in Spreadsheet
-4. From Spreadsheet, Go to `Mail Merge > Send mail`
+3. After saving script, you will notice a new menu **Gmail Mail Merge** in the Spreadsheet
+4. From Spreadsheet, Go to `Gmail Mail Merge > Start mail merge utility`
 
 
 ### Example Spreadsheet
